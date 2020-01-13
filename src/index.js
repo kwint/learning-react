@@ -60,18 +60,21 @@ class Game extends React.Component {
     const current = history[history.length - 1];
     const squares = current.squares.slice();
 
-    if (calculateWinner(squares || squares[i])) {
-      return;
-    }
+    if (squares[i] === null) {
 
-    squares[i] = this.state.xIsNext ? 'X' : 'O';
-    this.setState({
-      history: history.concat([{
-        squares: squares,
-      }]),
-      stepNumber: history.length,
-      xIsNext: !this.state.xIsNext,
-    })
+      if (calculateWinner(squares || squares[i])) {
+        return;
+      }
+
+      squares[i] = this.state.xIsNext ? 'X' : 'O';
+      this.setState({
+        history: history.concat([{
+          squares: squares,
+        }]),
+        stepNumber: history.length,
+        xIsNext: !this.state.xIsNext,
+      })
+    }
   }
 
   jumpTo(step) {
